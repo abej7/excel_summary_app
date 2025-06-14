@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excelアップロードツール</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Excelファイルアップロード</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="file">Excelファイルを選択 (.xlsx または .xls):</label>
+            <input type="file" name="file" id="file" accept=".xlsx,.xls" required>
+            <button type="submit">アップロードして処理</button>
+        </form>
+    </div>
+</body>
+</html>
