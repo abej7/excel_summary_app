@@ -2,18 +2,55 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excelアップロードツール</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>Excelファイルアップロード</h1>
-        <form method="POST" enctype="multipart/form-data">
-            <label for="file">Excelファイルを選択 (.xlsx または .xls):</label>
-            <input type="file" name="file" id="file" accept=".xlsx,.xls" required>
-            <button type="submit">アップロードして処理</button>
-        </form>
+
+        <!-- フラッシュメッセージ表示 -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-message">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+            <!-- ✅ ダウンロードボタンをメッセージの下に表示 -->
+            <a href="{{ url_for('download') }}" class="download-button">📥 ダウンロード</a>
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="form-block">
+            <!-- ドラッグ＆ドロップゾーン -->
+            <div id="drop-zone" class="drop-zone">
+                <div class="drop-content">
+                    <div class="drop-icon">⬇</div>
+                    <p>ここにExcelファイルをドラッグ＆ドロップ</p>
+                </div>
+            </div>
+
+            <!-- ファイルアップロードフォーム -->
+            <form id="upload-form" method="POST" enctype="multipart/form-data">
+                <label for="file">Excelファイルを選択（.xlsx または .xls）:</label>
+                <!-- ファイル選択 -->
+                <div class="file-select-area">
+                    <label for="file" class="custom-file-button">ファイルを選択</label>
+                    <input type="file" name="file" id="file" accept=".xlsx,.xls" required>
+                    <span id="file-name">選択されていません</span>
+                </div>
+                <br>
+                <button type="submit">アップロードして処理</button>
+            </form>
+
+            <!-- 処理中表示 -->
+            <div id="loading" style="display:none; margin-top: 20px;">
+                🔄 処理中…お待ちください
+            </div>
+        </div>
     </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

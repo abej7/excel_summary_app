@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, request, render_template, send_file, redirect, url_for, flash
+from werkzeug.utils import secure_filename
 import pandas as pd
 import os
-from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'
 
 UPLOAD_FOLDER = 'uploads'
 OUTPUT_FOLDER = 'outputs'
@@ -19,19 +20,26 @@ def index():
             filepath = os.path.join(UPLOAD_FOLDER, filename)
             file.save(filepath)
 
-            # Excelファイル読み込み
+            # Excel 処理
             df = pd.read_excel(filepath)
+            output_path = os.path.join(OUTPUT_FOLDER, 'summary.xlsx')
 
-            # 実用的な加工（ここでは "合計" 列を追加する例）
-            if '数量' in df.columns and '単価' in df.columns:
-                df['合計'] = df['数量'] * df['単価']
+            print("読み込み成功？", df.head())
+            print("出力先:", output_path)
 
-            output_path = os.path.join(OUTPUT_FOLDER, f"processed_{filename}")
             df.to_excel(output_path, index=False)
+            print("Excel保存完了")
 
-            return send_file(output_path, as_attachment=True)
+            # 完了メッセージ
+            flash("処理完了…下のボタンからダウンロードしてください！")
+            return redirect(url_for('index'))
 
     return render_template('index.html')
+
+@app.route('/download')
+def download():
+    output_path = os.path.join(OUTPUT_FOLDER, 'summary.xlsx')
+    return send_file(output_path, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
