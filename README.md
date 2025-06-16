@@ -1,3 +1,4 @@
+![アップロード](./images/ScreenCapture_03.png)
 # Excel集計ツール（Flaskアプリ）
 
 ## 📌 アプリ概要
@@ -23,25 +24,23 @@
 
 ### 1.　初期画面（起動時）
 
-![初期画面](/images/ScreenCapture_01.png)
+![初期画面](./images/ScreenCapture_01.png)
 
 ### 2-1.ExcelFile ドラッグ＆ドロップ
-![初期画面](/images/ScreenCapture_02-1.png)
+![ドラッグ＆ドロップ](./images/ScreenCapture_02-1.png)
 
 ### 2-2.ExcelFile ダイアログ選択
-![初期画面](/images/ScreenCapture_02-2.png)
+![ダイアログ選択](./images/ScreenCapture_02-2.png)
 
 ### 3. アップロードして処理
-![初期画面](/images/ScreenCapture_03.png)
+![アップロード](./images/ScreenCapture_03.png)
 
 ### 4. ダウンロード（処理後 ExcelFile）
-![初期画面](/images/ScreenCapture_04.png)
+![初期画面](./images/ScreenCapture_04.png)
 
 ### 5. 入出力 ExcelFile 結果
-![初期画面](/images/ScreenCapture_05.png)
+![入出力 結果](./images/ScreenCapture_05.png)
 
-
-例：`miages/upload_screen.png` など
 
 ---
 
